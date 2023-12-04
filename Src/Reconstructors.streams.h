@@ -117,7 +117,7 @@ struct TransformedInputSampleStream : public InputSampleStream< Real , Dim >
 	TransformedInputSampleStream( XForm< Real , Dim+1 > xForm , InputSampleStream< Real , Dim > &stream ) : _stream(stream) , _positionXForm(xForm)
 #endif // DE_VIRTUALIZE_INPUT
 	{
-		_normalXForm = XForm< Real , Dim > ( xForm ).inverse().transpose() * (Real)pow( xForm.determinant() , 1./Dim );
+		_normalXForm = XForm< Real , Dim > ( xForm ).inverse().transpose() * (Real)pow( std::abs(xForm.determinant()) , 1./Dim );
 	}
 
 	// Functionality to reset the stream to the start
@@ -168,7 +168,7 @@ struct TransformedInputSampleWithDataStream : public InputSampleWithDataStream< 
 	TransformedInputSampleWithDataStream( XForm< Real , Dim+1 > xForm , InputSampleWithDataStream< Real , Dim , Data > &stream ) : InputSampleWithDataStream< Real , Dim , Data >( stream.zero() ) , _stream(stream) , _positionXForm(xForm)
 #endif // DE_VIRTUALIZE_INPUT
 	{
-		_normalXForm = XForm< Real , Dim > ( xForm ).inverse().transpose() * (Real)pow( xForm.determinant() , 1./Dim );
+		_normalXForm = XForm< Real , Dim > ( xForm ).inverse().transpose() * (Real)pow( std::abs(xForm.determinant()) , 1./Dim );
 	}
 
 	// Functionality to reset the stream to the start
